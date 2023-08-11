@@ -1,0 +1,16 @@
+{
+  "name": "com.atb.control",
+  "version": "0.0.1",
+  "displayName": "Control",
+  "description": "This integrates the online headless control system into Unity.",
+  "unity": "2019.3",
+  "dependencies": {
+    "com.unity.nuget.newtonsoft-json": "1.1.2"
+  },
+  "author": {
+    "name": "Ash The Bash",
+    "email": "ash@atbweb.co.uk",
+    "url": ""
+  },
+  "type": "library"
+}

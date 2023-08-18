@@ -6,21 +6,8 @@ using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UI;
 
-public class ClientMainGame : MonoBehaviour
+public class ClientMainGame : SingletonMonoBehaviour<ClientMainGame>
 {
-    #region Init
-
-    public static ClientMainGame Get { get; private set; }
-    private void Awake()
-    {
-        if (Get != null && Get != this)
-            Destroy(this);
-        else
-            Get = this;
-    }
-
-    #endregion
-
     [Header("Leaderboard")]
     public ClientLeaderboardManager leaderboardManager;
 
@@ -88,5 +75,12 @@ public class ClientMainGame : MonoBehaviour
     {
         fixedMessageObj.SetActive(true);
         fixedMessageMesh.text = "THE GAME HAS NOW CONCLUDED AND THIS CONTROLLER CAN BE CLOSED.";
+    }
+
+    public void WrongApp()
+    {
+        fixedMessageObj.SetActive(true);
+        fixedMessageMesh.text = "YOU ARE ATTEMPTING TO PLAY THE GAME USING THE WRONG CONTROLLER APP.\n\n" +
+            "PLEASE CHECK THE GAME PAGE FOR THE CORRECT LINK TO THE CURRENT GAME.";
     }
 }

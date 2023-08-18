@@ -13,6 +13,9 @@ public class PlayerObject
     public string otp;
     public string playerName;
 
+    public GlobalLeaderboardStrap strap;
+    public GlobalLeaderboardStrap cloneStrap;
+
     public string twitchName;
     public Texture profileImage;
 
@@ -25,11 +28,11 @@ public class PlayerObject
     public bool flagForCondone;
     public bool wasCorrect;
 
-    public PlayerObject(Player pl)
+    public PlayerObject(Player pl, string name)
     {
         playerClientRef = pl;
         otp = OTPGenerator.GenerateOTP();
-        playerName = pl.Name;
+        playerName = name;
         points = 0;
         //podium = Podiums.GetPodiums.podia.FirstOrDefault(x => x.containedPlayer == null);
         //podium.containedPlayer = this;

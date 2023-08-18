@@ -73,10 +73,10 @@ public static class DebugLog
                 return "#FFA500";
 
             case ColorOption.Default:
-                return "#000000";
+                return "#FFFFFF";
 
             default:
-                return "#000000";
+                return "#FFFFFF";
         }
     }
 }

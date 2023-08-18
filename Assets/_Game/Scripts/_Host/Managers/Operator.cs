@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 using NaughtyAttributes;
 using System.Linq;
 
-public class Operator : MonoBehaviour
+public class Operator : SingletonMonoBehaviour<Operator>
 {
     [Header("Game Settings")]
     [Tooltip("Supresses Twitch chat messages and will store Pennys and medals in a separate test file")]
@@ -22,20 +22,11 @@ public class Operator : MonoBehaviour
     [Header("Quesion Data")]
     public TextAsset questionPack;
 
-    #region Init
-    public static Operator Get { get; private set; }
     private void Awake()
     {
-        if (Get != null && Get != this)
-            Destroy(this);
-        else
-            Get = this;
-
         if (recoveryMode)
             skipOpeningTitles = true;
     }
-
-    #endregion
 
     private void Start()
     {

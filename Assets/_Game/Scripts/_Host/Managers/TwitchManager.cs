@@ -9,7 +9,7 @@ using TwitchLib.Client.Models;
 using TwitchLib.Unity;
 using UnityEngine.Networking;
 
-public class TwitchManager : MonoBehaviour
+public class TwitchManager : SingletonMonoBehaviour<TwitchManager>
 {
     public string testUsername;
     public string testMessage;
@@ -20,14 +20,6 @@ public class TwitchManager : MonoBehaviour
     private string channelName = "royal_flush";
     private object userImageLock = new object();
 
-    public static TwitchManager GetTwitchControl { get; private set; }
-    private void Awake()
-    {
-        if (GetTwitchControl != null && GetTwitchControl != this)
-            Destroy(this);
-        else
-            GetTwitchControl = this;
-    }
     void Start()
     {
         Application.runInBackground = true;

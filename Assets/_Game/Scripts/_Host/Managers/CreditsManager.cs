@@ -4,20 +4,8 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class CreditsManager : MonoBehaviour
+public class CreditsManager : SingletonMonoBehaviour<CreditsManager>
 {
-    #region Init
-
-    public static CreditsManager Get { get; private set; }
-    private void Awake()
-    {
-        if (Get != null && Get != this)
-            Destroy(this);
-        else
-            Get = this;
-    }
-
-    #endregion
 
     public GameObject endCard;
 

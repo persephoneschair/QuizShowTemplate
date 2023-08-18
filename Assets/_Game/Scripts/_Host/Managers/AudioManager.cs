@@ -3,20 +3,8 @@ using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
 
-public class AudioManager : MonoBehaviour
+public class AudioManager : SingletonMonoBehaviour<AudioManager>
 {
-    #region Init
-
-    public static AudioManager Get { get; private set; }
-    private void Awake()
-    {
-        if (Get != null && Get != this)
-            Destroy(this);
-        else
-            Get = this;
-    }
-
-    #endregion
 
     public AudioSource oneShotSource;
     public AudioSource loopingSource;

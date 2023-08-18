@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraLerpManager : MonoBehaviour
+public class CameraLerpManager : SingletonMonoBehaviour<CameraLerpManager>
 {
     private Camera cam;
 
@@ -24,15 +24,8 @@ public class CameraLerpManager : MonoBehaviour
 
     #region Init
 
-    public static CameraLerpManager Get { get; private set; }
-
-    private void Awake()
+    private void Start()
     {
-        if (Get != null && Get != this)
-            Destroy(this);
-        else
-            Get = this;
-
         cam = GetComponent<Camera>();
     }
 

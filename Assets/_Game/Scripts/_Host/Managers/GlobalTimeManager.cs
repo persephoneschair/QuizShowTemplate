@@ -2,20 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GlobalTimeManager : MonoBehaviour
+public class GlobalTimeManager : SingletonMonoBehaviour<GlobalTimeManager>
 {
-    #region Init
-
-    public static GlobalTimeManager Get { get; private set; }
-    private void Awake()
-    {
-        if (Get != null && Get != this)
-            Destroy(this);
-        else
-            Get = this;
-    }
-
-    #endregion
 
     public bool questionClockRunning;
     [ShowOnly] public float elapsedTime;

@@ -4,21 +4,8 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class TitlesManager : MonoBehaviour
+public class TitlesManager : SingletonMonoBehaviour<TitlesManager>
 {
-    #region Init
-
-    public static TitlesManager Get { get; private set; }
-    private void Awake()
-    {
-        if (Get != null && Get != this)
-            Destroy(this);
-        else
-            Get = this;
-    }
-
-    #endregion
-
     [Button]
     public void RunTitleSequence()
     {

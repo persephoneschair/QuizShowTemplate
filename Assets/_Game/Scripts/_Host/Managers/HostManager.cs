@@ -5,23 +5,11 @@ using Control;
 using Newtonsoft.Json;
 using System.Linq;
 
-public class HostManager : MonoBehaviour
+public class HostManager : SingletonMonoBehaviour<HostManager>
 {
     [Header("Controlling Class")]
     public Host host;
-
-    #region Init
-
-    public static HostManager Get { get; private set; }
-    private void Awake()
-    {
-        if (Get != null && Get != this)
-            Destroy(this);
-        else
-            Get = this;
-    }
-
-    #endregion
+    public string gameName;
 
     #region Join Room & Validation
 
@@ -32,12 +20,19 @@ public class HostManager : MonoBehaviour
 
     public void OnPlayerJoins(Player joinedPlayer)
     {
+        string[] name = joinedPlayer.Name.Split('¬');
+        if (name[1] != gameName)
+        {
+            SendPayloadToClient(joinedPlayer, EventLibrary.HostEventType.WrongApp, "");
+            return;
+        }
+
         if (PlayerManager.Get.players.Count >= Operator.Get.playerLimit && Operator.Get.playerLimit != 0)
         {
             //Do something slightly better than this
             return;
         }
-        PlayerObject pl = new PlayerObject(joinedPlayer);
+        PlayerObject pl = new PlayerObject(joinedPlayer, name[0].Trim());
         pl.playerClientID = joinedPlayer.UserID;
         PlayerManager.Get.players.Add(pl);
         
@@ -62,24 +57,24 @@ public class HostManager : MonoBehaviour
         else if (Operator.Get.fastValidation)
             StartCoroutine(FastValidation(pl));
 
-        DebugLog.Print($"{joinedPlayer.Name} HAS JOINED THE LOBBY", DebugLog.StyleOption.Bold, DebugLog.ColorOption.Green);
+        DebugLog.Print($"{name[0].Trim()} HAS JOINED THE LOBBY", DebugLog.StyleOption.Bold, DebugLog.ColorOption.Green);
         SendPayloadToClient(joinedPlayer, EventLibrary.HostEventType.Validate, $"{pl.otp}");
     }
 
     private IEnumerator FastValidation(PlayerObject pl)
     {
         yield return new WaitForSeconds(1f);
-        TwitchManager.GetTwitchControl.testUsername = pl.playerName;
-        TwitchManager.GetTwitchControl.testMessage = pl.otp;
-        TwitchManager.GetTwitchControl.SendTwitchWhisper();
-        TwitchManager.GetTwitchControl.testUsername = "";
-        TwitchManager.GetTwitchControl.testMessage = "";
+        TwitchManager.Get.testUsername = pl.playerName;
+        TwitchManager.Get.testMessage = pl.otp;
+        TwitchManager.Get.SendTwitchWhisper();
+        TwitchManager.Get.testUsername = "";
+        TwitchManager.Get.testMessage = "";
     }
 
     private IEnumerator RecoveryValidation(PlayerObject pl)
     {
         yield return new WaitForSeconds(1f);
-        TwitchManager.GetTwitchControl.RecoveryValidation(pl.twitchName, pl.otp);
+        TwitchManager.Get.RecoveryValidation(pl.twitchName, pl.otp);
     }
 
     #endregion

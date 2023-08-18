@@ -6,28 +6,16 @@ using TMPro;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 
-public class ClientManager : MonoBehaviour
+public class ClientManager : SingletonMonoBehaviour<ClientManager>
 {
     public Client client;
-
-    #region Init
-
-    public static ClientManager Get { get; private set; }
-    private void Awake()
-    {
-        if (Get != null && Get != this)
-            Destroy(this);
-        else
-            Get = this;
-    }
-
-    #endregion
+    public string gameName;
 
     #region Connection
 
     public void AttemptToConnectToRoom(string name, string roomCode)
     {
-        client.Connect(name, roomCode);
+        client.Connect(name + "¬" + gameName, roomCode);
     }
 
     public void OnConnected(string roomCode)
@@ -63,6 +51,11 @@ public class ClientManager : MonoBehaviour
 
             case EventLibrary.HostEventType.SecondInstance:
                 ClientMainGame.Get.NewInstanceOpened();
+                break;
+
+            case EventLibrary.HostEventType.WrongApp:
+            case EventLibrary.HostEventType.WRONGAPP:
+                ClientMainGame.Get.WrongApp();
                 break;
 
             default:

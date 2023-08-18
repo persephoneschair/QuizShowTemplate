@@ -4,21 +4,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ClientLandingPageManager : MonoBehaviour
+public class ClientLandingPageManager : SingletonMonoBehaviour<ClientLandingPageManager>
 {
-    #region Init
-
-    public static ClientLandingPageManager Get { get; private set; }
-    private void Awake()
-    {
-        if (Get != null && Get != this)
-            Destroy(this);
-        else
-            Get = this;
-    }
-
-    #endregion
-
     [Header("Landing Page")]
     public GameObject joinBoxObj;
     public TextMeshProUGUI versionMesh;

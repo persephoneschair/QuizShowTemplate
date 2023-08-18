@@ -220,7 +220,7 @@ GameObject:
   - component: {fileID: 2270284166751635511}
   - component: {fileID: 79299997166081116}
   m_Layer: 5
-  m_Name: ScrollingLeaderboard
+  m_Name: ClientScrollingLeaderboard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

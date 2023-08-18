@@ -4,21 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class PlayerManager : MonoBehaviour
+public class PlayerManager : SingletonMonoBehaviour<PlayerManager>
 {
-    #region Init
-
-    public static PlayerManager Get { get; private set; }
-
-    private void Awake()
-    {
-        if (Get != null && Get != this)
-            Destroy(this);
-        else
-            Get = this;
-    }
-
-    #endregion
 
     public List<PlayerObject> players = new List<PlayerObject>();
 

@@ -4,21 +4,8 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class InstructionsManager : MonoBehaviour
+public class InstructionsManager : SingletonMonoBehaviour<InstructionsManager>
 {
-    #region Init
-
-    public static InstructionsManager Get { get; private set; }
-    private void Awake()
-    {
-        if (Get != null && Get != this)
-            Destroy(this);
-        else
-            Get = this;
-    }
-
-    #endregion
-
     public TextMeshProUGUI instructionsMesh;
     public Animator instructionsAnim;
     private readonly string[] instructions = new string[4]

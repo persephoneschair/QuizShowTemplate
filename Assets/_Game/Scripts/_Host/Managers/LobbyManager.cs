@@ -4,21 +4,8 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class LobbyManager : MonoBehaviour
+public class LobbyManager : SingletonMonoBehaviour<LobbyManager>
 {
-    #region Init
-
-    public static LobbyManager Get { get; private set; }
-    private void Awake()
-    {
-        if (Get != null && Get != this)
-            Destroy(this);
-        else
-            Get = this;
-    }
-
-    #endregion
-
     public bool lateEntry;
 
     public TextMeshProUGUI welcomeMessageMesh;

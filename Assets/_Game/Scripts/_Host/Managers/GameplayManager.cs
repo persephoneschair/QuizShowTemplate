@@ -7,7 +7,7 @@ using TMPro;
 using System.Linq;
 using Control;
 
-public class GameplayManager : MonoBehaviour
+public class GameplayManager : SingletonMonoBehaviour<GameplayManager>
 {
     [Header("Rounds")]
     public RoundBase[] rounds;
@@ -35,19 +35,6 @@ public class GameplayManager : MonoBehaviour
     public enum Round { None };
     public Round currentRound = Round.None;
     public int roundsPlayed = 0;
-
-    #region Init
-
-    public static GameplayManager Get { get; private set; }
-    private void Awake()
-    {
-        if (Get != null && Get != this)
-            Destroy(this);
-        else
-            Get = this;
-    }
-
-    #endregion
 
     [Button]
     public void ProgressGameplay()

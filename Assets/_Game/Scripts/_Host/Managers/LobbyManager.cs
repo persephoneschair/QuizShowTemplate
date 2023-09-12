@@ -10,8 +10,16 @@ public class LobbyManager : SingletonMonoBehaviour<LobbyManager>
 
     public TextMeshProUGUI welcomeMessageMesh;
     public Animator lobbyCodeAnim;
-    private const string welcomeMessage = "Welcome to the game [ABCD]";
-    private const string permaMessage = "Perma Message [ABCD]";
+    private const string welcomeMessage = "";
+
+    //"Welcome to <font=RiskyBusiness><size=200%>GAME NAME</size></font>\n\n" +
+    //  "" +
+    //"Playing on a mobile device? Scan the QR code!\n\n\n\n\n\n\n" +
+    //"" +
+    //"Desktop or laptop? Please visit:\n<color=yellow>https://persephoneschair.itch.io/gamenight</color>\n" +
+    //"<size=300%><color=#F8A3A3>[ABCD]</color>";
+
+    private const string permaMessage = "To join the game, please visit <color=yellow>https://persephoneschair.itch.io/gamenight</color> and join with the room code <color=#F8A3A3>[ABCD]</color>";
 
     public Animator permaCodeAnim;
     public TextMeshProUGUI permaCodeMesh;

@@ -22,22 +22,24 @@ public class Operator : SingletonMonoBehaviour<Operator>
     [Header("Quesion Data")]
     public TextAsset questionPack;
 
-    private void Awake()
+    public override void Awake()
     {
+        base.Awake();
         if (recoveryMode)
             skipOpeningTitles = true;
     }
 
     private void Start()
     {
+        if(recoveryMode)
+            skipOpeningTitles = true;
+
         HostManager.Get.host.ReloadHost = recoveryMode;
         if (recoveryMode)
             SaveManager.RestoreData();
 
         if (questionPack != null)
-        {
             QuestionManager.DecompilePack(questionPack);
-        }            
         else
             DebugLog.Print("NO QUESTION PACK LOADED; PLEASE ASSIGN ONE AND RESTART THE BUILD", DebugLog.StyleOption.Bold, DebugLog.ColorOption.Red);
 

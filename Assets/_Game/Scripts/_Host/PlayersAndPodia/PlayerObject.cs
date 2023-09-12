@@ -41,7 +41,7 @@ public class PlayerObject
     public void ApplyProfilePicture(string name, Texture tx, bool bypassSwitchAccount = false)
     {
         //Player refreshs and rejoins the same game
-        if(PlayerManager.Get.players.Count(x => (!string.IsNullOrEmpty(x.twitchName)) && x.twitchName.ToLowerInvariant() == name.ToLowerInvariant()) > 0 && !bypassSwitchAccount)
+        if (PlayerManager.Get.players.Count(x => (!string.IsNullOrEmpty(x.twitchName)) && x.twitchName.ToLowerInvariant() == name.ToLowerInvariant()) > 0 && !bypassSwitchAccount)
         {
             PlayerObject oldPlayer = PlayerManager.Get.players.FirstOrDefault(x => x.twitchName.ToLowerInvariant() == name.ToLowerInvariant());
             if (oldPlayer == null)
@@ -60,8 +60,10 @@ public class PlayerObject
             playerClientRef = null;
             playerName = "";
 
-            PlayerManager.Get.players.Remove(this);
-            HostManager.Get.SendPayloadToClient(oldPlayer, EventLibrary.HostEventType.Validated, $"{oldPlayer.playerName}|{oldPlayer.points.ToString()}");
+            if (PlayerManager.Get.pendingPlayers.Contains(this))
+                PlayerManager.Get.pendingPlayers.Remove(this);
+
+            HostManager.Get.SendPayloadToClient(oldPlayer, EventLibrary.HostEventType.Validated, $"{oldPlayer.playerName}|{oldPlayer.points.ToString()}|{oldPlayer.twitchName}");
             //HostManager.Get.UpdateLeaderboards();
             return;
         }
@@ -79,7 +81,19 @@ public class PlayerObject
             points = 0;
             eliminated = true;
         }
-        HostManager.Get.SendPayloadToClient(this, EventLibrary.HostEventType.Validated, $"{playerName}|{points.ToString()}");
+        HostManager.Get.SendPayloadToClient(this, EventLibrary.HostEventType.Validated, $"{playerName}|{points.ToString()}|{twitchName}");
+        PlayerManager.Get.players.Add(this);
+        PlayerManager.Get.pendingPlayers.Remove(this);
+        LeaderboardManager.Get.PlayerHasJoined(this);
         //HostManager.GetHost.UpdateLeaderboards();
+    }
+
+    public void HandlePlayerScoring(string[] submittedAnswers)
+    {
+        switch(GameplayManager.Get.currentRound)
+        {
+            default:
+                break;
+        }
     }
 }

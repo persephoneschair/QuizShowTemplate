@@ -5,7 +5,7 @@ public class SingletonMonoBehaviour<T> : MonoBehaviour where T : MonoBehaviour
     #region Init
 
     public static T Get { get; private set; }
-    private void Awake()
+    public virtual void Awake()
     {
         if (Get != null && Get != this)
         {

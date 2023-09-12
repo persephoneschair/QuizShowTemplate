@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class PlayerManager : SingletonMonoBehaviour<PlayerManager>
 {
-
+    public List<PlayerObject> pendingPlayers = new List<PlayerObject>();
     public List<PlayerObject> players = new List<PlayerObject>();
 
     [Header("Controls")]

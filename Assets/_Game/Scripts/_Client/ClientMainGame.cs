@@ -40,7 +40,7 @@ public class ClientMainGame : SingletonMonoBehaviour<ClientMainGame>
 
     public void OnSubmitAnswer()
     {
-        ClientManager.Get.SendPayloadToHost("ANSWER GOES HERE", EventLibrary.ClientEventType.Answer);
+        //ClientManager.Get.SendPayloadToHost("ANSWER GOES HERE", EventLibrary.ClientEventType.Answer);
     }
 
     public void DisplayResponse(string[] data)

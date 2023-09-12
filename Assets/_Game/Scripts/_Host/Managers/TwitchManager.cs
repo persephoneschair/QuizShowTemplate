@@ -51,9 +51,9 @@ public class TwitchManager : SingletonMonoBehaviour<TwitchManager>
     {
         //Check to see if the typed message matches any of the OTPs of the players in the lobby and that their Twitch name is not already populated
         //Check that any of the Twitch names are not not empty and that Twitch name is the same as the username
-        if(PlayerManager.Get.players.Any(x => x.otp.ToUpperInvariant() == message.ToUpperInvariant()))
+        if(PlayerManager.Get.pendingPlayers.Any(x => x.otp.ToUpperInvariant() == message.ToUpperInvariant()))
         {
-            var pl = PlayerManager.Get.players.FirstOrDefault(x => x.otp.ToUpperInvariant() == message.ToUpperInvariant() && string.IsNullOrEmpty(x.twitchName));
+            var pl = PlayerManager.Get.pendingPlayers.FirstOrDefault(x => x.otp.ToUpperInvariant() == message.ToUpperInvariant() && string.IsNullOrEmpty(x.twitchName));
             DebugLog.Print(pl.playerName + " (" + id.UserName + ") has validated their account.", DebugLog.StyleOption.Bold, DebugLog.ColorOption.Yellow);
             SendBotMessage(id.UserName + ", you have validated your account.");
             List<string> l = new List<string> { id.UserName };
@@ -64,9 +64,9 @@ public class TwitchManager : SingletonMonoBehaviour<TwitchManager>
 
     public void RecoveryValidation(string twitchName, string otp)
     {
-        if (PlayerManager.Get.players.Any(x => x.otp.ToUpperInvariant() == otp.ToUpperInvariant()))            
+        if (PlayerManager.Get.pendingPlayers.Any(x => x.otp.ToUpperInvariant() == otp.ToUpperInvariant()))
         {
-            var pl = PlayerManager.Get.players.FirstOrDefault(x => x.otp.ToUpperInvariant() == otp.ToUpperInvariant());
+            var pl = PlayerManager.Get.pendingPlayers.FirstOrDefault(x => x.otp.ToUpperInvariant() == otp.ToUpperInvariant());
             DebugLog.Print(pl.playerName + " (" + twitchName + ") has validated their account.", DebugLog.StyleOption.Bold, DebugLog.ColorOption.Yellow);
             SendBotMessage(twitchName + ", you have validated your account.");
             List<string> l = new List<string> { twitchName };

@@ -132,7 +132,7 @@ public class TwitchManager : SingletonMonoBehaviour<TwitchManager>
                         texture.filterMode = FilterMode.Bilinear;
                         texture.Apply(true, true);
 
-                        p.ApplyProfilePicture(users[0], texture, true);
+                        p.ApplyProfilePicture(users[0], texture, bypassSwitchAccount);
                     }
                 }
                 else

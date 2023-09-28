@@ -101,6 +101,10 @@ public class HostManager : SingletonMonoBehaviour<HostManager>
         //[0] = question
         //[1] = (int)time in seconds
 
+        //Numerical Question
+        //[0] = question
+        //[1] = (int)time in seconds
+
         //Multiple Choice / Multi-select
         //[0] = question
         //[1] = (int)time in seconds
@@ -135,6 +139,12 @@ public class HostManager : SingletonMonoBehaviour<HostManager>
                 TwitchManager.Get.testMessage = "";
                 break;
 
+            case EventLibrary.ClientEventType.NumericalQuestion:
+                //This will have an array length of [1]
+                p.HandlePlayerScoring(data.Split('|'));
+                SendPayloadToClient(p, EventLibrary.HostEventType.Information, "Answer received");
+                break;
+
             case EventLibrary.ClientEventType.SimpleQuestion:
                 //This will have an array length of [1]
                 p.HandlePlayerScoring(data.Split('|'));
@@ -152,6 +162,13 @@ public class HostManager : SingletonMonoBehaviour<HostManager>
                 p.HandlePlayerScoring(data.Split('|'));
                 SendPayloadToClient(p, EventLibrary.HostEventType.Information, "Answer received");
                 break;
+
+            case EventLibrary.ClientEventType.DangerZoneQuestion:
+                //This will have an array length of [1] or [2]
+                p.HandlePlayerScoring(data.Split('|'));
+                SendPayloadToClient(p, EventLibrary.HostEventType.Information, "Answer received");
+                break;
+
 
             default:
                 break;

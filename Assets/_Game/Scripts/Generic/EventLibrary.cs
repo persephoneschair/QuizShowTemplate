@@ -17,8 +17,10 @@ public static class EventLibrary
         UpdateScore,
 
         SimpleQuestion,
+        NumericalQuestion,
         MultipleChoiceQuestion,
         MultiSelectQuestion,
+        DangerZoneQuestion,
 
         SingleAndMultiResult,
 
@@ -31,8 +33,10 @@ public static class EventLibrary
         StoredValidation,
         
         SimpleQuestion,
+        NumericalQuestion,
         MultipleChoiceQuestion,
-        MultiSelectQuestion
+        MultiSelectQuestion,
+        DangerZoneQuestion
     };
 
     public static string GetHostEventTypeString(HostEventType e)

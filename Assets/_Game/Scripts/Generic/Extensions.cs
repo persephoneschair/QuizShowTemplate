@@ -147,6 +147,14 @@ public static class Extensions
         return words;
     }
 
+    public static string ForceFirstCharToUpper(string st)
+    {
+        if (string.IsNullOrEmpty(st) || st.Length == 1)
+            return st;
+        else
+            return $"{st[0].ToString().ToUpperInvariant()}{st.Substring(1)}";
+    }
+
     public static bool Spellchecker(string input, List<string> validAnswers)
     {
         double similarity = 0;
@@ -186,5 +194,10 @@ public static class Extensions
     public static T PickRandom<T>(this T[] arr)
     {
         return arr[UnityEngine.Random.Range(0, arr.Length)];
+    }
+
+    public static string PointOrPoints(int x)
+    {
+        return x == 1 ? $"{x} POINT" : $"{x} POINTS";
     }
 }

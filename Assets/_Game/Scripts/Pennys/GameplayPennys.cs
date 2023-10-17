@@ -9,30 +9,16 @@ using NaughtyAttributes;
 using System.Linq;
 using TMPro;
 
-public class GameplayPennys : MonoBehaviour
+public class GameplayPennys : SingletonMonoBehaviour<GameplayPennys>
 {
-    #region Init
-
-    public static GameplayPennys GetPennys { get; private set; }
-    private void Awake()
-    {
-        if (GetPennys != null && GetPennys != this)
-            Destroy(this);
-        else
-            GetPennys = this;
-    }
-
-    #endregion
-
     private PlayerShell playerList;
     private MedalTableObject medalList;
     private List<LeaderboardObject> leaderboardList;
     private readonly string path = @"D:\Unity Projects\HerokuPennyData\PennyStorage";
 
     public int authorPennys;
-    [Range (1, 10)] public int multiplyFactor;
+    [Range (1, 50)] public int multiplyFactor;
     public string gameName;
-
 
     [Button]
     public void UpdatePennysAndMedals()
@@ -132,13 +118,12 @@ public class GameplayPennys : MonoBehaviour
         string pennyPath = Operator.Get.testMode ? path + @"\NewPennysTest.txt" : path + @"\NewPennys.txt";
         string medalPath = Operator.Get.testMode ? path + $@"\{gameName}Test.txt" : path + $@"\{gameName}.txt";
 
-        string newDataContent = JsonConvert.SerializeObject(playerList);
+        string newDataContent = JsonConvert.SerializeObject(playerList, Formatting.Indented);
         File.WriteAllText(pennyPath, newDataContent);
 
         if (!string.IsNullOrEmpty(gameName))
         {
-            medalPath = path + $@"\{gameName}Test.txt";
-            newDataContent = JsonConvert.SerializeObject(medalList);
+            newDataContent = JsonConvert.SerializeObject(medalList, Formatting.Indented);
             File.WriteAllText(medalPath, newDataContent);
         }
 

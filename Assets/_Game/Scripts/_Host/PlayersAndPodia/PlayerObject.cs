@@ -73,9 +73,8 @@ public class PlayerObject
         //podium.avatarRend.material.mainTexture = profileImage;
         if(!LobbyManager.Get.lateEntry)
         {
-
-        }
             //podium.InitialisePodium();
+        }
         else
         {
             points = 0;
@@ -85,6 +84,7 @@ public class PlayerObject
         PlayerManager.Get.players.Add(this);
         PlayerManager.Get.pendingPlayers.Remove(this);
         LeaderboardManager.Get.PlayerHasJoined(this);
+        SaveManager.BackUpData();
         //HostManager.GetHost.UpdateLeaderboards();
     }
 

@@ -11,7 +11,7 @@ public static class EventLogger
     public static void StoreEvent(LoggableEvent l)
     {
         log.Add(l);
-        formattedLog = JsonConvert.SerializeObject(log);
+        formattedLog = JsonConvert.SerializeObject(log, Formatting.Indented);
     }
 
     public static void PrintLog()

@@ -17,7 +17,7 @@ public static class SaveManager
         foreach(PlayerObject plO in PlayerManager.Get.players)
             backupDataList.Add(NewPlayer(plO));
 
-        var playerData = JsonConvert.SerializeObject(backupDataList);
+        var playerData = JsonConvert.SerializeObject(backupDataList, Formatting.Indented);
 
         File.WriteAllText(Application.persistentDataPath + "\\BackUpData.txt", playerData);
 
@@ -28,7 +28,7 @@ public static class SaveManager
             roundsPlayed = GameplayManager.Get.roundsPlayed
         };
 
-        var gameStateData = JsonConvert.SerializeObject(gpd);
+        var gameStateData = JsonConvert.SerializeObject(gpd, Formatting.Indented);
 
         File.WriteAllText(Application.persistentDataPath + "\\GameplayData.txt", gameStateData);
     }

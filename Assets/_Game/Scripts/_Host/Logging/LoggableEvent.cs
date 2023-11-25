@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class LoggableEvent
 {
-    public enum EventType { AudiencePlayerEvent, HotseatPlayerEvent, GameplayEvent };
+    public enum EventType { AudiencePlayerEvent, HotseatPlayerEvent, GameplayEvent, PasteAlertEvent };
 
     public string timestamp;
     public string currentRound;

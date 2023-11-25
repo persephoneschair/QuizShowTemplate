@@ -36,7 +36,8 @@ public static class EventLibrary
         NumericalQuestion,
         MultipleChoiceQuestion,
         MultiSelectQuestion,
-        DangerZoneQuestion
+        DangerZoneQuestion,
+        PasteAlert
     };
 
     public static string GetHostEventTypeString(HostEventType e)

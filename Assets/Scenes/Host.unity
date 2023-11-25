@@ -1215,6 +1215,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   host: {fileID: 800084187}
+  gameName: 
 --- !u!114 &800084187
 MonoBehaviour:
   m_ObjectHideFlags: 0

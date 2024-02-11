@@ -110,9 +110,21 @@ public class HostManager : SingletonMonoBehaviour<HostManager>
         //[1] = (int)time in seconds
         //[2]-[n] = options
 
+        //Multi-select limited
+        //[0] = question
+        //[1] = (int)time in seconds
+        //[2] = limiter (X answers must be selected before submit activates)
+        //[3]-[n] = options
+
         //Single & Multi Result
         //[0] = answer message (simply include list as concatenated string)
         //[1] = feedbackBox colorstyle enum (DEFAULT|CORRECT|INCORRECT - AS STRING)
+
+        //Double Information
+        //Used almost exclusively in Distinction!
+        //Two data points in a single string, separated by |
+        //[0] = box #1
+        //[1] = box #2
     }
 
     public void SendPayloadToClient(Control.Player pl, EventLibrary.HostEventType e, string data)

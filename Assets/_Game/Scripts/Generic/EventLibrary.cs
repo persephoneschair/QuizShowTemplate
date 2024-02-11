@@ -14,12 +14,14 @@ public static class EventLibrary
         SecondInstance,
 
         Information,
+        DoubleInformation,
         UpdateScore,
 
         SimpleQuestion,
         NumericalQuestion,
         MultipleChoiceQuestion,
         MultiSelectQuestion,
+        MultiSelectQuestionLimited,
         DangerZoneQuestion,
 
         SingleAndMultiResult,
